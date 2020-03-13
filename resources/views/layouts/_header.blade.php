@@ -14,9 +14,24 @@
 
             <!--Right Side Of Navbar -->
             <ul class="navbar-nav navbar-right">
-                <!--Authentication Links-->
-                <li class="nav-item"><a class="nav-link" href="#">登陆</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">注册</a></li>
+                @guest
+                    <!--Authentication Links-->
+                    <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">登陆</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">注册</a></li>
+                @else
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="https://i.picsum.photos/id/669/30/30.jpg" class="img-responsive img-circle" width="30px" height="30px">
+                            {{ Auth::user()->name }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a href="#" class="dropdown-item" id="logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">退出登录</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none">
+                                {{ csrf_field() }}
+                            </form>
+                        </div>
+                    </li>
+                @endguest
             </ul>
         </div>
     </div>
