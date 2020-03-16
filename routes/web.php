@@ -21,4 +21,6 @@ Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('user/addresses', 'UserAddressesController@index')->name('user.addresses.index');
+    Route::get('user/address/create', 'UserAddressesController@create')->name('user.address.create');
+    Route::post('user/address', 'UserAddressesController@store')->name('user.address.store');
 });
